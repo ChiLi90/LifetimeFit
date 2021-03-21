@@ -1,7 +1,7 @@
 This folder includes relevant codes to process data and generate analysis
 results in Li and Cohen, JGR, 2021.
 
-The main scripts include:
+1) The main scripts include:
 
 1. MonthlyProcess.py: read satellite and reanalysis files and calculate
 monthly mean fields of AOD/sulfate mass/SO2 mass.
@@ -38,4 +38,26 @@ parser params:
 --subdir : the program will creat a directory under the "level" directory to
 generate output txt files that record the fitting params
 --DoDiff: (experimental) whether use the difference between e.g.2008 and low-volcanic
-activity years (e.g. 2005-2007) to calculate plume flux, default is False 
+activity years (e.g. 2005-2007) to calculate plume flux, default is False
+
+This program will generate txt files 'YYYYMM.fit' under 'Pdir/subdir/'
+
+2) The main analysis code includes:
+
+1. MapMonthly.py: used to generate mapped fields like Figure 1 of Li and Cohen
+(2021). 'plotVar' is 'Aer' for plotting aerosol mass (DoBeta=True) or AOD
+(DoBeta=False), 'SO2' for plotting SO2 mass. 
+
+2. PlotTS.py: used to generate function of plume flux vs. plume age (Figure 2
+of Li and Cohen, 2021).
+
+3. CompareSO2lt.py: generate Figure 3 of Li and Cohen (2021)
+
+4. CompareSO4lt.py: generate Figure 6 of Li and Cohen (2021)
+
+5. PlotSO2loss.py: analyze GEOS-Chem simulation and plot e.g. supplement
+Figure S8 of Li and Cohen (2021)
+
+6. PlotSO4loss.py: analyze GEOS-Chem simulation and plot e.g. supplement
+Figure S10 of Li and Cohen (2021)
+
