@@ -1,0 +1,41 @@
+This folder includes relevant codes to process data and generate analysis
+results in Li and Cohen, JGR, 2021.
+
+The main scripts include:
+
+1. MonthlyProcess.py: read satellite and reanalysis files and calculate
+monthly mean fields of AOD/sulfate mass/SO2 mass.
+
+inputs:
+UVdir: folder of ERA5 wind fields
+CPdir: folder of ERA5 cloud and precipitation fiels
+RHdir: folder of ERA5 Relative Humidity
+Caliopdir: folder of CALIPSO level 3 data
+Satdir: folder of MODIS/OMI satellite data
+outtop: output directory
+
+parser params:
+--year --month: YYYYMM to identifile files to accumulate
+--Var: SO2 or AOD
+--level: an string indicator that will be used creat a folder under the output
+directory, which defines the pressure range when constructing the aerosol
+fields (sulfate mass or AOD) included. See the code ('if level==...') for
+details
+--DoBeta: if True calculate sulfate mass from AOD, if False, directly
+accumulate AOD
+--DoCaliop: if True use CALIOP profile to slice AOD vertically, should be True
+if 'level' is not 'All'
+
+The output files are monthly fields in netCDF4 format.
+
+2. FluxFit.py: read the calculated mass and flux fields vs. plume age as from
+MonthlyProcess.py and do the Fit of SO2 and aerosol lifetime
+
+Pdir: corresponding to the "outtop" directory in MonthlyProcess.py
+
+parser params:
+--year --month --level --DoBeta : same meaning as in MonthlyProcess.py
+--subdir : the program will creat a directory under the "level" directory to
+generate output txt files that record the fitting params
+--DoDiff: (experimental) whether use the difference between e.g.2008 and low-volcanic
+activity years (e.g. 2005-2007) to calculate plume flux, default is False 
